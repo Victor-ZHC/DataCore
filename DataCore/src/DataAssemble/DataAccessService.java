@@ -16,19 +16,19 @@ public class DataAccessService {
         public ScheduledFuture scheduledFuture;
         public int periodInMinutes;
     }
-    private Map<String, ScheduledTask> dataAccessTasks;
+    private Map<String, ScheduledTask> DataAccesss;
     private ScheduledExecutorService scheduledExecutorService;
 
     public DataAccessService(int threadNum) {
-        dataAccessTasks = new HashMap<>();
+        DataAccesss = new HashMap<>();
         scheduledExecutorService = Executors.newScheduledThreadPool(threadNum);
     }
 
-    public void AppendTask(List<DataAccessTask> tasks) {
-        for (DataAccessTask task : tasks) {
-            if (dataAccessTasks.containsKey(task.getDataId())) {
+    public void AppendTask(List<DataAccess> tasks) {
+        for (DataAccess task : tasks) {
+            if (DataAccesss.containsKey(task.getDataId())) {
                 ScheduledTask scheduledTask =
-                        dataAccessTasks.get(task.getDataId());
+                        DataAccesss.get(task.getDataId());
 
                 if (scheduledTask.periodInMinutes >
                         task.getDataAccessIntervalInSeconds()) {
@@ -42,7 +42,7 @@ public class DataAccessService {
                             task.getDataAccessIntervalInSeconds(), TimeUnit.SECONDS);
             scheduledTask.periodInMinutes = task.getDataAccessIntervalInSeconds();
 
-            dataAccessTasks.put(task.getDataId(), scheduledTask);
+            DataAccesss.put(task.getDataId(), scheduledTask);
         }
     }
 }

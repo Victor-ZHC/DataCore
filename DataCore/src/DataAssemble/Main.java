@@ -24,7 +24,7 @@ public class Main {
     private static final int DATA_ACCESS_THREAD_NUMBER = 32;
     private static final int DATA_ASSEMBLE_THREAD_NUMBER = 32;
 
-    private static final String MONGODB_IP = "127.0.0.1";
+    private static final String MONGODB_IP = "139.224.57.175";
     private static final int MONGODB_PORT = 27017;
     private static final String MONGODB_CONFIG_DB = "DataConfig";
     private static final String MONGODB_GOAL_DATA_COLLECTION = "goalData";
@@ -43,7 +43,7 @@ public class Main {
     				);
     
     private static final String MEMCACHED_IP = "127.0.0.1";
-    private static int MEMCACHED_PORT = 11211;
+    private static int MEMCACHED_PORT = 11211;//zhc
     private static MemcachedClient memcachedClient;
     		
 
@@ -57,8 +57,8 @@ public class Main {
     					mongoCursor.next(), 
     					memcachedClient
     					);
-    			dataAccessService.AppendTask(task.dataAccessTask);
-    			dataAssembleService.AppendTask(task.dataAssembleTask);
+    			dataAccessService.AppendTask(task.dataAccess);
+    			dataAssembleService.AppendTask(task.dataAssemble);
     		}
     	} finally {
     		mongoCursor.close();

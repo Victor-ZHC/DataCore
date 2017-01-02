@@ -12,21 +12,21 @@ import java.util.concurrent.TimeUnit;
  */
 public class DataAssembleService {
     private ScheduledExecutorService scheduledExecutorService;
-    private Map<String, ScheduledFuture> dataAssembleTasks;
+    private Map<String, ScheduledFuture> DataAssembles;
 
     public DataAssembleService(int threadNum) {
         scheduledExecutorService = Executors.newScheduledThreadPool(threadNum);
-        dataAssembleTasks = new HashMap<>();
+        DataAssembles = new HashMap<>();
     }
 
-    public void AppendTask(DataAssembleTask task) {
-        if (dataAssembleTasks.containsKey(task.getResultDataId())) {
-            dataAssembleTasks.get(task.getResultDataId()).cancel(false);
+    public void AppendTask(DataAssemble task) {
+        if (DataAssembles.containsKey(task.getResultDataId())) {
+            DataAssembles.get(task.getResultDataId()).cancel(false);
         }
 
         ScheduledFuture scheduledFuture =
                 scheduledExecutorService.scheduleAtFixedRate(task::run, 0,
                         task.getDataAssembleIntervalInSeconds(), TimeUnit.SECONDS);
-        dataAssembleTasks.put(task.getResultDataId(), scheduledFuture);
+        DataAssembles.put(task.getResultDataId(), scheduledFuture);
     }
 }
