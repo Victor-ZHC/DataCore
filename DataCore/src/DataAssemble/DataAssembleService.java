@@ -1,4 +1,4 @@
-package DataAssemble;
+package dataAssemble;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,9 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Quanyang Liu on 10/18/16.
+ * 数据组装线程调度类
+ * @author Victor_Zhou
+ *
  */
 public class DataAssembleService {
     private ScheduledExecutorService scheduledExecutorService;
@@ -19,7 +21,11 @@ public class DataAssembleService {
         DataAssembles = new HashMap<>();
     }
 
-    public void AppendTask(DataAssemble task) {
+    /**
+     * 将组数据装线程加入线程池
+     * @param task
+     */
+    public void appendTask(DataAssemble task) {
         if (DataAssembles.containsKey(task.getResultDataId())) {
             DataAssembles.get(task.getResultDataId()).cancel(false);
         }

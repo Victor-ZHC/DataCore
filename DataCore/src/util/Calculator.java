@@ -2,7 +2,11 @@ package util;
 
 import java.util.Collections;
 import java.util.Stack;
-
+/**
+ * 表达式字符串解析类
+ * @author Victor_Zhou
+ *
+ */
 public class Calculator {
     private Stack<String> postfixStack  = new Stack<String>();//后缀式栈
     private Stack<Character> opStack  = new Stack<Character>();//运算符栈

@@ -1,5 +1,9 @@
 package util;
-
+/**
+ * 计算类
+ * @author Victor_Zhou
+ *
+ */
 public class ArithHelper {
 
     // 默认除法运算精度

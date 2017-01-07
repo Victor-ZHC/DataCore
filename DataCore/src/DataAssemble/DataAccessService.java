@@ -1,4 +1,4 @@
-package DataAssemble;
+package dataAssemble;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,9 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Quanyang Liu on 10/18/16.
+ * 数据获取线程调度类
+ * @author Victor_Zhou
+ *
  */
 public class DataAccessService {
     class ScheduledTask {
@@ -24,7 +26,11 @@ public class DataAccessService {
         scheduledExecutorService = Executors.newScheduledThreadPool(threadNum);
     }
 
-    public void AppendTask(List<DataAccess> tasks) {
+    /**
+     * 将数据获取线程加入线程池
+     * @param tasks
+     */
+    public void appendTask(List<DataAccess> tasks) {
         for (DataAccess task : tasks) {
             if (DataAccesss.containsKey(task.getDataId())) {
                 ScheduledTask scheduledTask =

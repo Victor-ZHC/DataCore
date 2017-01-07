@@ -1,4 +1,4 @@
-package DataAssemble;
+package dataAssemble;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -15,7 +15,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Quanyang Liu on 10/18/16.
+ * 程序入口类
+ * @author Victor_Zhou
+ *
  */
 public class Main {
     // in minutes
@@ -43,33 +45,41 @@ public class Main {
     				);
     
     private static final String MEMCACHED_IP = "127.0.0.1";
-    private static int MEMCACHED_PORT = 11211;//zhc
+    private static int MEMCACHED_PORT = 12333;//zhc
     private static MemcachedClient memcachedClient;
     		
 
-    private static void ConfigFetch() {
+    /**
+     * 配置获取
+     */
+    private static void configFetch() {
     	MongoCursor<BsonDocument> mongoCursor =
     			mongoCollection.find().iterator();
     	
     	try {
     		while (mongoCursor.hasNext()) {
-    			Task task = Task.FromDocument(
+    			Task task = Task.fromDocument(
     					mongoCursor.next(), 
     					memcachedClient
     					);
-    			dataAccessService.AppendTask(task.dataAccess);
-    			dataAssembleService.AppendTask(task.dataAssemble);
+    			dataAccessService.appendTask(task.dataAccess);
+    			dataAssembleService.appendTask(task.dataAssemble);
     		}
     	} finally {
     		mongoCursor.close();
     	}
     }
 
+    /**
+     * 程序入口
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
     	memcachedClient = new MemcachedClient(new InetSocketAddress(MEMCACHED_IP, MEMCACHED_PORT));
         ScheduledExecutorService scheduledExecutorService =
                 Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleAtFixedRate(Main::ConfigFetch, 0,
+        scheduledExecutorService.scheduleAtFixedRate(Main::configFetch, 0,
                 CONFIG_FETCH_INTERVAL_IN_MINUTES, TimeUnit.MINUTES);
     }
 }
