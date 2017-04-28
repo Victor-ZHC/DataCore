@@ -1,0 +1,2 @@
+# DataCore
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cfbf8f7b43f409eafe3e6aa3230c37e)](https://www.codacy.com/app/Victor-ZHC/DataCore?utm_source=github.com&utm_medium=referral&utm_content=Victor-ZHC/DataCore&utm_campaign=badger)
